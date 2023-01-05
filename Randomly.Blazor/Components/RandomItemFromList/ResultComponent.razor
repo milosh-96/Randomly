@@ -1,0 +1,24 @@
+﻿
+<div id="result">
+    @if (Item != null)
+    {
+        <h3>@Item</h3>
+    }
+    else
+    {
+       <ol>
+            <li>
+                Add Items
+            </li>
+            <li>
+                Click on <strong>Get</strong> for the Random item.
+            </li>
+        </ol>
+    }
+</div>
+
+
+@code {
+    [Parameter]
+    public string? Item { get; set; }
+}

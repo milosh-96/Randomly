@@ -1,0 +1,23 @@
+﻿<div>
+    <div class="grid-x">
+        <div class="small-8">
+            <label>
+                <input style="height:2.55rem" type="text" @bind="Item" />
+            </label>
+        </div>
+        <div class="small-4">
+            <button style="width:100%" @onclick="()=>OnAddedItem.InvokeAsync(Item)" class="button secondary">
+                Add
+            </button>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public EventCallback<string> OnAddedItem { get; set; }
+    [Parameter]
+    public string Item { get; set; } = "";
+
+   
+}

@@ -1,0 +1,38 @@
+﻿@using Randomly.Blazor.Data.ListView;
+<div class="list-view">
+    @if(Items.Count > 0)
+    {
+        <ul>
+            @foreach(var item in Items)
+            {
+                <li>@item.DisplayText</li>
+            }
+        </ul>
+
+    }
+    else {
+    <div>
+        There are no items in the provided list.
+    </div>
+    }
+</div>
+@if(Items.Count > 0)
+{
+    <button class="button small" @onclick="()=>OnClear.InvokeAsync()">Clear</button>
+
+}
+@code {
+
+    [Parameter]
+    public EventCallback OnClear { get; set; }
+
+    [Parameter]
+    public List<ListViewItem> Items { get; set; } = new List<ListViewItem>();
+
+
+   
+    protected override void OnInitialized()
+    {
+       
+    }
+}

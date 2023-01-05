@@ -1,0 +1,66 @@
+﻿@page "/randomfromlist"
+@page "/randomitemfromlist"
+@using Randomly.Blazor.Components
+@using Randomly.Blazor.Components.RandomItemFromList
+@using Randomly.Blazor.Data.ListView;
+@{
+    var pageTitle = "Random Item From List";
+}
+<PageTitle>@pageTitle</PageTitle>
+
+<div class="grid-x">
+    <div class="small-12 medium-8 medium-offset-2">
+        <h2>@pageTitle</h2>
+
+        <div class="grid-x">
+            <div class="cell small-12 medium-6">
+               <AddNewComponent OnAddedItem="OnAddedItem"  Item="@NewItem"></AddNewComponent>
+                <ListViewComponent OnClear="()=>Items=new List<string>()"
+                    Items="Items.Select(x=>new ListViewItem(){DisplayText=x}).ToList()">
+                </ListViewComponent>
+            </div>
+            <div class="cell small-12 medium-6">
+                <button @onclick="GetRandomItem" class="button primary" style="width:100%">
+                    Get
+                </button>
+                    <ResultComponent Item="@RandomItem"></ResultComponent>
+            </div>
+        </div>
+
+    </div>
+</div>
+@code {
+    public int Debug { get; set; } = 0;
+    public string NewItem { get; set; } = "New Item";
+    public List<string> Items { get; set; } = new List<string>();
+
+    public string? RandomItem { get; set; } = null;
+
+    protected override void OnInitialized()
+    {
+        this.Items.Add("Kafa");
+        this.Items.Add("Mleko");
+        this.Items.Add("Šećer");
+        this.Items.Add("Sok");
+        this.Items.Add("Suncokret");
+        this.Items.Add("Hleb");
+        this.Items.Add("Grizine");
+    }
+
+    public void OnAddedItem(string item)
+    {
+        Items.Add(item);
+    }
+
+    public void GetRandomItem()
+    {
+        if(Items.Count > 0)
+        {
+            int randomNumber = new Random().Next(0, Items.Count - 1);
+
+            RandomItem = Items[randomNumber];
+            Debug = randomNumber;
+        }
+    }
+
+}
