@@ -1,5 +1,6 @@
 ﻿@page "/randomfromlist"
 @page "/randomitemfromlist"
+@inject IJSRuntime jsRuntime
 @using Randomly.Blazor.Components
 @using Randomly.Blazor.Components.RandomItemFromList
 @using Randomly.Blazor.Data.ListView;
@@ -38,18 +39,22 @@
 
     protected override void OnInitialized()
     {
-        this.Items.Add("Kafa");
-        this.Items.Add("Mleko");
-        this.Items.Add("Šećer");
-        this.Items.Add("Sok");
-        this.Items.Add("Suncokret");
-        this.Items.Add("Hleb");
-        this.Items.Add("Grizine");
+
     }
 
     public void OnAddedItem(string item)
     {
-        Items.Add(item);
+        if (item != null && !String.IsNullOrEmpty(item))
+        {
+            Items.Add(item);
+        }
+        else
+        {
+            jsRuntime.InvokeVoidAsync(
+                "alert",
+                "Item couldn't be added. Make sure you typed in something in the input box."
+            );
+        }
     }
 
     public void GetRandomItem()

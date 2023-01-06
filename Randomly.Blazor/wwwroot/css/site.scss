@@ -16,10 +16,10 @@ body {
 }
 
 input {
-    background: linear-gradient(to left,#ccc,#efefef);
+    background: linear-gradient(to left,#fcfcfc,#efefef);
 
     &:hover {
-        background: linear-gradient(to left,#ccc,#efefef 45%);
+        background: linear-gradient(to left,#fcfcfc,#efefef 45%);
     }
 }
 .button {
